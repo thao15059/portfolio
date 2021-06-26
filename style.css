@@ -8,11 +8,79 @@
   text-decoration: none;
   list-style-type: none;
   outline: none;
-  font-family: "Jura" sans-serif;
+  font-family: "Jura", sans-serif;
 }
 
 html {
   font-size: 62.5%;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mouse Circle */
+.mouse-circle,
+.mouse-dot {
+  border-radius: 50%;
+  position: fixed;
+  z-index: 300;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.mouse-circle {
+  width: 6rem;
+  height: 6rem;
+  border: 0.1rem solid #c7a622;
+  animation: mouseCircleAnimate 10s infinite linear;
+}
+
+@keyframes mouseCircleAnimate {
+  0% {
+    width: 6rem;
+    height: 6rem;
+  }
+  25% {
+    width: 8rem;
+    height: 8rem;
+  }
+  35% {
+    width: 4rem;
+    height: 4rem;
+  }
+  70% {
+    width: 8rem;
+    height: 8rem;
+  }
+  100% {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+
+.mouse-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #9b0e0e;
+  animation: mouseDotAnimate 10s infinite linear;
+}
+
+@keyframes mouseDotAnimate {
+  0% {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  55% {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  100% {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
 }
 
 /* Page BG */
@@ -23,4 +91,100 @@ html {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url(images/bg.jpg) center no-repeat;
   background-size: cover;
+}
+
+/* Section 1 */
+.section-1 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Logo */
+.logo {
+  position: absolute;
+  top: 2rem;
+  left: 5rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* Animated Circles */
+.circles {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.circle {
+  width: 22rem;
+  height: 22rem;
+  border-radius: 50%;
+  background: red;
+  align-self: center;
+  justify-self: center;
+  opacity: 0.5;
+}
+
+.circle-1 {
+  background: url(images/landing/circle-1-img.jpg) center no-repeat;
+  background-size: cover;
+  background-clip: content-box;
+  border: 0.5rem dotted #a14b1a;
+}
+
+.circle-2 {
+  background: url(images/landing/circle-2-img.jpg) center no-repeat;
+  background-size: cover;
+  background-clip: content-box;
+  border: 0.5rem dashed #ffbd07;
+}
+
+.circle-3 {
+  background: url(images/landing/circle-3-img.jpg) center no-repeat;
+  background-size: cover;
+  background-clip: content-box;
+  border: 1rem double #9b0e0e;
+}
+
+.circle-4 {
+  background: url(images/landing/circle-4-img.jpg) center no-repeat;
+  background-size: cover;
+  background-clip: content-box;
+  border: 0.75rem double #fff;
+}
+
+.main-circle {
+  width: 55rem;
+  height: 55rem;
+  position: absolute;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.main-circle img {
+  mix-blend-mode: color-dodge;
+}
+
+/* Featured Text */
+.featured-text {
+  font-size: 2rem;
+  color: #fff;
+  text-transform: uppercase;
+  width: 0;
+  word-wrap: break-word;
+  line-height: 3.5;
+  position: sticky;
+  top: 0;
+}
+
+.featured-text-1 {
+  margin: 0 auto 0 10rem;
+}
+
+.featured-text-2 {
+  margin: 0 10rem 0 auto;
 }
