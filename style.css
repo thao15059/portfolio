@@ -193,6 +193,63 @@ html {
   background-size: cover;
 }
 
+/* Navigation */
+/* Menu Icon */
+.menu-icon {
+  position: fixed;
+  width: 12rem;
+  height: 7rem;
+  top: 0;
+  right: 6rem;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 100;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.show-menu-icon {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-icon-line {
+  width: 4rem;
+  height: 0.1rem;
+  background: #fff;
+  margin: 0.5rem 0;
+  box-shadow: 0 0.3rem 0.5rem #000;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 2.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 3rem;
+  transition: all 0.5s;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.hide-navbar {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(50%);
+}
+
+.navbar-link {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 2.5rem;
+
+  text-shadow: 0 0.3rem 0.5rem #000;
+}
+
 /* Section 1 */
 .section-1 {
   position: relative;
