@@ -307,7 +307,7 @@ const progressBarFn = (bigImgWrapper) => {
 progressBar.addEventListener("click", (e) => {
   e.preventDefault();
 
-  if (!bigImgWrapper) {
+  if (!imageWrapper) {
     const sectionPositions = Array.from(sections).map(
       (section) => scrolledPortion + section.getBoundingClientRect().top
     );
@@ -319,8 +319,8 @@ progressBar.addEventListener("click", (e) => {
     scrollBool ? window.scrollTo(0, 0) : window.scrollTo(0, nextPosition);
   } else {
     scrollBool
-      ? bigImgWrapper.scrollTo(0, 0)
-      : bigImgWrapper.scrollTo(0, bigImgWrapper.scrollHeight);
+      ? imageWrapper.scrollTo(0, 0)
+      : imageWrapper.scrollTo(0, imageWrapper.scrollHeight);
   }
 });
 
