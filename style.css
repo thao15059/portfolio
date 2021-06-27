@@ -193,6 +193,63 @@ html {
   background-size: cover;
 }
 
+/* Progress Bar */
+.progress-bar {
+  position: fixed;
+  bottom: 8rem;
+  right: 8rem;
+  width: 8rem;
+  height: 8rem;
+  background: #fff;
+  border-radius: 50%;
+  z-index: 200;
+  overflow: hidden;
+}
+
+.half-circle,
+.half-circle-top {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform-origin: right center;
+}
+
+.half-circle:nth-child(1) {
+  background: #b60000;
+}
+.half-circle:nth-child(2) {
+  background: #b60000;
+}
+.half-circle-top {
+  background: #fff;
+}
+
+/* .progress-bar:hover .half-circle:nth-child(1) {
+  transform: rotate(180deg);
+  transition: all 1s linear;
+}
+.progress-bar:hover .half-circle:nth-child(2) {
+  transform: rotate(360deg);
+  transition: all 2s linear;
+}
+.progress-bar:hover .half-circle-top {
+  opacity: 0;
+  transition: all 0s 1s;
+} */
+
+.progress-bar-circle {
+  width: 7.5rem;
+  height: 7.5rem;
+  background: #000;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 4rem;
+  z-index: 200;
+  transition: all 0.5s;
+}
+
 /* Navigation */
 /* Menu Icon */
 .menu-icon {
@@ -502,6 +559,8 @@ html {
   background: rgba(0, 0, 0, 0.9);
   animation: imgWrapperAnimate 1s forwards;
   overflow: hidden scroll;
+  z-index: 100;
+  scroll-behavior: smooth;
 }
 
 @keyframes imgWrapperAnimate {
@@ -519,6 +578,7 @@ html {
   padding: 7rem 20rem;
   opacity: 0.9;
   transform-origin: top center;
+  display: block; /* fix issue with progress bar because page height not equal image size */
   animation: projectImgAnimate 1s 1s both;
 }
 
@@ -543,7 +603,7 @@ html {
   font-size: 2rem;
   letter-spacing: 0.1rem;
   cursor: pointer;
-  z-index: 10;
+  z-index: 200;
   transform: scale(0);
   visibility: hidden;
   transition: all 0.5s;

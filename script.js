@@ -121,11 +121,14 @@ projects.forEach((project, index) => {
     bigImg.className = "project-img";
     const imgPath = project.firstElementChild.getAttribute("src").split(".")[0];
     bigImg.setAttribute("src", `${imgPath}-big.jpg`);
-
     bigImgWrapper.appendChild(bigImg);
     // Hidden scrool when big project img show
     document.body.style.overflowY = "hidden";
 
+    document.removeEventListener("scroll", scrollFn);
+    progressBarFn(bigImgWrapper);
+
+    bigImgWrapper.onscroll = () => progressBarFn(bigImgWrapper);
     projectHideBtn.classList.add("change");
 
     // Only add 1 time
@@ -133,6 +136,10 @@ projects.forEach((project, index) => {
       projectHideBtn.classList.remove("change");
       bigImgWrapper.remove();
       document.body.style.overflowY = "scroll";
+
+      document.addEventListener("scroll", scrollFn);
+
+      progressBarFn();
     };
   });
 
@@ -198,8 +205,6 @@ document.querySelectorAll(".service-btn").forEach((service) => {
       ? `calc(100% - ${getComputedStyle(service.firstElementChild).width})`
       : 0;
 
-    console.log(rightPosition);
-
     service.firstElementChild.style.right = rightPosition;
   });
 });
@@ -250,11 +255,82 @@ setInterval(() => {
   }, 500);
 }, 3000);
 
+// Progress Bar
+const sections = document.querySelectorAll("section");
+const progressBar = document.querySelector(".progress-bar");
+const halftCircles = document.querySelectorAll(".half-circle");
+const halfCircleTop = document.querySelector(".half-circle-top");
+const progressBarCircle = document.querySelector(".progress-bar-circle");
+
+let scrolledPortion = 0;
+let scrollBool = false;
+let imageWrapper = false;
+
+const progressBarFn = (bigImgWrapper) => {
+  imageWrapper = bigImgWrapper;
+  const pageViewportHeight = window.innerHeight;
+  let pageHeight = 0;
+
+  if (!imageWrapper) {
+    scrolledPortion = window.pageYOffset;
+    pageHeight = document.documentElement.scrollHeight;
+  } else {
+    pageHeight = imageWrapper.firstElementChild.scrollHeight;
+    scrolledPortion = imageWrapper.scrollTop;
+  }
+
+  const scrolledPortitionDegree =
+    (scrolledPortion / (pageHeight - pageViewportHeight)) * 360;
+
+  halftCircles.forEach((el) => {
+    el.style.transform = `rotate(${scrolledPortitionDegree}deg)`;
+  });
+
+  if (scrolledPortitionDegree >= 180) {
+    halftCircles[0].style.transform = "rotate(180deg)";
+    halfCircleTop.style.opacity = "0";
+  } else {
+    halfCircleTop.style.opacity = "1";
+  }
+
+  scrollBool = scrolledPortion + pageViewportHeight === pageHeight;
+
+  // Arrow Rotation when Page Ended
+  if (scrollBool) {
+    progressBarCircle.style.transform = "rotate(180deg)";
+  } else {
+    progressBarCircle.style.transform = "rotate(0)";
+  }
+};
+
+// Progress Bar Click
+progressBar.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  if (!bigImgWrapper) {
+    const sectionPositions = Array.from(sections).map(
+      (section) => scrolledPortion + section.getBoundingClientRect().top
+    );
+
+    const nextPosition = sectionPositions.find(
+      (sectionPosition) => sectionPosition > scrolledPortion
+    );
+
+    scrollBool ? window.scrollTo(0, 0) : window.scrollTo(0, nextPosition);
+  } else {
+    scrollBool
+      ? bigImgWrapper.scrollTo(0, 0)
+      : bigImgWrapper.scrollTo(0, bigImgWrapper.scrollHeight);
+  }
+});
+
+progressBarFn();
+
 // Navigation
 const menuIcon = document.querySelector(".menu-icon");
 const navbar = document.querySelector(".navbar");
 
-document.addEventListener("scroll", () => {
+const scrollFn = () => {
   menuIcon.classList.add("show-menu-icon");
   navbar.classList.add("hide-navbar");
 
@@ -262,7 +338,11 @@ document.addEventListener("scroll", () => {
     menuIcon.classList.remove("show-menu-icon");
     navbar.classList.remove("hide-navbar");
   }
-});
+
+  progressBarFn();
+};
+
+document.addEventListener("scroll", scrollFn);
 
 menuIcon.addEventListener("click", () => {
   menuIcon.classList.remove("show-menu-icon");
