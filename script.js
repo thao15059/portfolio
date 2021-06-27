@@ -348,3 +348,5 @@ menuIcon.addEventListener("click", () => {
   menuIcon.classList.remove("show-menu-icon");
   navbar.classList.remove("hide-navbar");
 });
+
+// Form Validate

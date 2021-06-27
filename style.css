@@ -22,6 +22,11 @@ html {
   align-items: center;
 }
 
+ion-icon {
+  font-size: 7rem;
+  color: #fff;
+}
+
 /* Section Heading */
 .section-heading {
   font-size: 2rem;
