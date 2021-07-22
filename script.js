@@ -114,6 +114,15 @@ projects.forEach((project, index) => {
   // Big Project Image
   project.addEventListener("click", () => {
     const bigImgWrapper = document.createElement("div");
+
+    // Insert Github Link
+    const projectDesc = document.createElement("div");
+    projectDesc.className = "center project-description";
+    projectDesc.innerHTML = `<a target="_blank" href="${document
+      .querySelector(`#${project.firstElementChild.getAttribute("id")}`)
+      .getAttribute("data-github-url")}">Github</a>`;
+    bigImgWrapper.appendChild(projectDesc);
+
     bigImgWrapper.className = "project-img-wrapper";
     container.appendChild(bigImgWrapper);
 
